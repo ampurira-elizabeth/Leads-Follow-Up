@@ -8,11 +8,12 @@ use App\Http\Controllers\LeadController;
 
 Route::post('register',[UserAuthController::class,'register']);
 Route::post('login',[UserAuthController::class,'login']);
+Route::post('auth/refresh-token',[UserAuthController::class,'refresh']);
 Route::post('logout',[UserAuthController::class,'logout'])
   ->middleware('auth:sanctum');
 
   Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/leads/data', [LeadController::class,'index']);
+    Route::get('/leads/data', [LeadController::class,'index']);
     Route::post('/store/leads', [LeadController::class, 'store']);
     Route::put('/leads/{lead}', [LeadController::class, 'update']);
     Route::post('/store/followups', [FollowUpController::class, 'store']);
